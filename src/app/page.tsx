@@ -35,9 +35,9 @@ export default function HomePage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--white)' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--white)', overflowX: 'hidden', width: '100%' }}>
       {/* Navigation */}
-      <nav style={{
+      <nav className="nav-container" style={{
         position: 'fixed',
         top: 0,
         left: 0,
@@ -84,7 +84,7 @@ export default function HomePage() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             {user && profile ? (
-              <>
+              <div className="desktop-auth" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <div style={{
                     width: 34, height: 34, borderRadius: '50%',
@@ -112,20 +112,22 @@ export default function HomePage() {
                 }}>
                   <LogOut size={18} />
                 </button>
-              </>
+              </div>
             ) : (
               <>
-                <Link href="/login" style={{
-                  color: 'rgba(255,255,255,0.8)',
-                  textDecoration: 'none',
-                  fontSize: 14,
-                  fontWeight: 500,
-                }}>Iniciar Sesión</Link>
-                <Link href="/register" className="btn btn-primary" style={{
-                  padding: '10px 24px',
-                  borderRadius: 'var(--radius-full)',
-                  fontSize: 13,
-                }}>Reservar Ahora</Link>
+                <div className="desktop-auth" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                  <Link href="/login" style={{
+                    color: 'rgba(255,255,255,0.8)',
+                    textDecoration: 'none',
+                    fontSize: 14,
+                    fontWeight: 500,
+                  }}>Iniciar Sesión</Link>
+                  <Link href="/register" className="btn btn-primary" style={{
+                    padding: '10px 24px',
+                    borderRadius: 'var(--radius-full)',
+                    fontSize: 13,
+                  }}>Reservar Ahora</Link>
+                </div>
               </>
             )}
             <button
@@ -138,6 +140,70 @@ export default function HomePage() {
           </div>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenu && (
+        <div style={{
+          position: 'fixed', top: 68, left: 0, right: 0, height: '100vh',
+          background: 'rgba(10,22,40,0.98)', backdropFilter: 'blur(20px)', zIndex: 99,
+          padding: '40px 20px', display: 'flex', flexDirection: 'column', gap: 24,
+          animation: 'fadeIn 0.2s ease-out'
+        }}>
+          {['Explorar', 'Apartamentos', 'Yates', 'Nosotros', 'Contacto'].map(item => (
+            <Link key={item} href="#" onClick={() => setMobileMenu(false)} style={{
+              color: 'white', textDecoration: 'none', fontSize: 20, fontWeight: 500,
+            }}>{item}</Link>
+          ))}
+
+          <div style={{ height: 1, background: 'rgba(255,255,255,0.1)', margin: '10px 0' }} />
+
+          {!user && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <Link href="/login" onClick={() => setMobileMenu(false)} style={{
+                color: 'white', textDecoration: 'none', fontSize: 18, fontWeight: 500, textAlign: 'center',
+                padding: '12px', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 'var(--radius-lg)'
+              }}>Iniciar Sesión</Link>
+              <Link href="/register" onClick={() => setMobileMenu(false)} className="btn btn-primary" style={{
+                padding: '14px', borderRadius: 'var(--radius-lg)', fontSize: 18, textAlign: 'center'
+              }}>Reservar Ahora</Link>
+            </div>
+          )}
+          {user && profile && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                <div style={{
+                  width: 48, height: 48, borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #0ABAB5, #D4A853)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: 18, fontWeight: 700, color: 'white',
+                }}>
+                  {(profile.full_name || user.email || '?').charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <div style={{ color: 'white', fontSize: 16, fontWeight: 600 }}>{profile.full_name || 'Usuario'}</div>
+                  <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>{user.email}</div>
+                </div>
+              </div>
+
+              <Link href="/my-bookings" onClick={() => setMobileMenu(false)} style={{
+                color: 'white', textDecoration: 'none', fontSize: 18, fontWeight: 500, padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.1)'
+              }}>Mis Reservas</Link>
+
+              {profile.role === 'admin' && (
+                <Link href="/admin" onClick={() => setMobileMenu(false)} style={{
+                  color: '#D4A853', textDecoration: 'none', fontSize: 18, fontWeight: 500, padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.1)'
+                }}>Panel Admin</Link>
+              )}
+
+              <button onClick={() => { signOut(); setMobileMenu(false); }} className="btn btn-outline" style={{
+                marginTop: 10, padding: '12px', borderRadius: 'var(--radius-lg)', fontSize: 16,
+              }}>
+                <LogOut size={18} /> Cerrar Sesión
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Hero Section */}
       <section style={{
@@ -168,7 +234,7 @@ export default function HomePage() {
           <path d="M0 120L48 110C96 100 192 80 288 70C384 60 480 60 576 65C672 70 768 80 864 85C960 90 1056 90 1152 85C1248 80 1344 70 1392 65L1440 60V120H0Z" fill="white" />
         </svg>
 
-        <div style={{
+        <div className="hero-content" style={{
           position: 'relative',
           zIndex: 3,
           textAlign: 'center',
@@ -248,8 +314,8 @@ export default function HomePage() {
       </section>
 
       {/* Category Filters */}
-      <section style={{ maxWidth: 1400, margin: '0 auto', padding: '40px 40px 0' }}>
-        <div style={{ display: 'flex', gap: 4, borderBottom: '2px solid var(--gray-100)', marginBottom: 40 }}>
+      <section className="section-padding" style={{ maxWidth: 1400, margin: '0 auto', padding: '40px 40px 0' }}>
+        <div style={{ display: 'flex', gap: 4, borderBottom: '2px solid var(--gray-100)', marginBottom: 40, overflowX: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 8 }}>
           {[
             { key: 'all' as FilterType, label: 'Todas', icon: <Search size={16} /> },
             { key: 'apartment' as FilterType, label: 'Apartamentos', icon: <Building2 size={16} /> },
@@ -382,7 +448,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer style={{ background: 'var(--navy)', color: 'white', padding: '60px 40px 30px' }}>
+      <footer className="footer-padding" style={{ background: 'var(--navy)', color: 'white', padding: '60px 40px 30px' }}>
         <div style={{ maxWidth: 1400, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 40, marginBottom: 40 }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
@@ -431,9 +497,20 @@ export default function HomePage() {
       </footer>
 
       <style jsx>{`
+        ::-webkit-scrollbar {
+          height: 4px;
+        }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
+          .desktop-auth { display: none !important; }
           .mobile-menu-btn { display: block !important; }
+          .nav-container { padding: 12px 20px !important; }
+          .hero-content { padding: 0 20px !important; }
+          .section-padding { padding: 40px 20px 0 !important; }
+          .footer-padding { padding: 40px 20px 20px !important; }
+          
+          /* Force SVG waves to avoid creating extra width if scaled */
+          svg { max-width: 100vw; }
         }
       `}</style>
     </div>
