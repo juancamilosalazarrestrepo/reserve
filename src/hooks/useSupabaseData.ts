@@ -125,7 +125,7 @@ export function useReservations() {
             .order('check_in', { ascending: true })
 
         if (error) console.error('[useReservations] Error:', error.message)
-        if (data) setReservations(data)
+        if (data) setReservations(data as unknown as Reservation[])
         setLoading(false)
     }
 
@@ -156,7 +156,7 @@ export function useAssetReservations(assetId: string) {
                 .order('check_in', { ascending: true })
 
             if (error) console.error('[useAssetReservations] Error:', error.message)
-            if (data) setReservations(data)
+            if (data) setReservations(data as unknown as Reservation[])
             setLoading(false)
         }
 
@@ -192,16 +192,19 @@ export function useMyReservations(userId: string | undefined) {
             if (error) console.error('[useMyReservations] Error:', error.message)
 
             if (resData && resData.length > 0) {
-                const assetIds = [...new Set(resData.map(r => r.asset_id))]
+                const typedResData = resData as unknown as Reservation[]
+                const assetIds = [...new Set(typedResData.map(r => r.asset_id))]
+
                 const { data: assetsData } = await supabase
                     .from('assets')
                     .select('*')
                     .in('id', assetIds)
 
                 const assetsMap: Record<string, Asset> = {}
-                assetsData?.forEach(a => { assetsMap[a.id] = a })
+                const typedAssetsData = (assetsData || []) as unknown as Asset[]
+                typedAssetsData.forEach(a => { assetsMap[a.id] = a })
 
-                setReservations(resData.map(r => ({
+                setReservations(typedResData.map(r => ({
                     ...r,
                     asset: assetsMap[r.asset_id] || undefined,
                 })))

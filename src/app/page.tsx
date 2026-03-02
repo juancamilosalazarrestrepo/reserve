@@ -13,7 +13,7 @@ export default function HomePage() {
   const [checkIn, setCheckIn] = useState('')
   const [checkOut, setCheckOut] = useState('')
   const [mobileMenu, setMobileMenu] = useState(false)
-  const { assets, loading } = useActiveAssets()
+  const { assets, loading, error } = useActiveAssets()
   const { user, profile, signOut } = useAuth()
 
   const filteredAssets = assets.filter(a => {
@@ -272,6 +272,13 @@ export default function HomePage() {
         {loading && (
           <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--gray-400)' }}>
             <div style={{ fontSize: 16, fontWeight: 500 }}>Cargando propiedades...</div>
+          </div>
+        )}
+
+        {/* Error */}
+        {error && (
+          <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--red)' }}>
+            <div style={{ fontSize: 16, fontWeight: 500 }}>Error cargando propiedades: {error}</div>
           </div>
         )}
 

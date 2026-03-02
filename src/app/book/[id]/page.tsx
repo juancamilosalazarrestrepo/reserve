@@ -73,6 +73,13 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
         // Simular tiempo de procesamiento de MercadoPago (2 segundos)
         setTimeout(async () => {
             const supabase = createClient()
+            if (!supabase) {
+                alert("Error de conexión a la base de datos. Cliente no inicializado.")
+                setIsProcessingPayment(false)
+                return
+            }
+
+            // @ts-expect-error - Supabase generic types from SSR sometimes map as never in Next.js Strict Mode
             const { error } = await supabase.from('reservations').insert({
                 asset_id: asset.id,
                 client_id: user.id,
