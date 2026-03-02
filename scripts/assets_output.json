@@ -1,0 +1,81 @@
+[
+  {
+    "id": "a1cfab02-57b3-4e5f-920f-f040c557831b",
+    "name": "Oceanfront Penthouse Suite",
+    "type": "apartment",
+    "description": "Indulge in the ultimate luxury experience at our stunning Oceanfront Penthouse Suite. Featuring panoramic floor-to-ceiling windows with breathtaking views of the Caribbean Sea, this spacious retreat combines modern elegance with tropical comfort.",
+    "images": [
+      "/images/apt-penthouse-1.jpg",
+      "/images/apt-penthouse-2.jpg",
+      "/images/apt-penthouse-3.jpg"
+    ]
+  },
+  {
+    "id": "ffbda19a-7e67-4026-aad5-e6075e2b5d9e",
+    "name": "Sea View Apartment",
+    "type": "apartment",
+    "description": "A charming apartment with direct sea views from every room. Located in the heart of San Luis, offering the perfect blend of tranquility and accessibility to the island attractions.",
+    "images": [
+      "/images/apt-seaview-1.jpg",
+      "/images/apt-seaview-2.jpg"
+    ]
+  },
+  {
+    "id": "999f0acf-57cf-4967-b98e-f4ce9376bf97",
+    "name": "Garden Paradise Villa",
+    "type": "apartment",
+    "description": "Nestled in lush tropical gardens at La Loma, this villa offers a serene escape with a private pool, outdoor dining area, and direct access to stunning nature trails.",
+    "images": [
+      "/images/apt-garden-1.jpg",
+      "/images/apt-garden-2.jpg"
+    ]
+  },
+  {
+    "id": "7d1e0117-e2aa-4b07-bde0-bfd63940eda5",
+    "name": "Tropical Studio",
+    "type": "apartment",
+    "description": "A cozy and stylish studio apartment perfect for couples, right in the center of the island with walking distance to the best restaurants and nightlife.",
+    "images": [
+      "/images/apt-studio-1.jpg"
+    ]
+  },
+  {
+    "id": "e2e17ec2-ba23-47d3-ace5-ba0d9f9edcc6",
+    "name": "Yacht Azzurro 50ft",
+    "type": "yacht",
+    "description": "Step aboard the magnificent Yacht Azzurro, a 50-foot luxury vessel perfect for exploring the crystal-clear waters around San Andrés. Includes professional crew and water sports equipment.",
+    "images": [
+      "/images/yacht-azzurro-1.jpg",
+      "/images/yacht-azzurro-2.jpg"
+    ]
+  },
+  {
+    "id": "ef2a16e2-576e-487f-9b9c-618421ec195e",
+    "name": "Yacht Caribbean Star",
+    "type": "yacht",
+    "description": "The Caribbean Star is your gateway to paradise. This elegant 40-foot yacht features a spacious sun deck, premium audio system, and comes with an experienced captain for half or full-day excursions.",
+    "images": [
+      "/images/yacht-star-1.jpg",
+      "/images/yacht-star-2.jpg"
+    ]
+  },
+  {
+    "id": "6249a5b0-a37e-4f04-9351-993ea1ba3a0b",
+    "name": "Yacht Ruby",
+    "type": "yacht",
+    "description": "The crown jewel of our fleet. The 65-foot Yacht Esmeralda offers unparalleled luxury with a jacuzzi on deck, a professional chef, and accommodations for overnight Caribbean adventures.",
+    "images": [
+      "/images/yacht-esmeralda-1.jpg",
+      "/images/yacht-esmeralda-2.jpg"
+    ]
+  },
+  {
+    "id": "f2c40dc1-52ff-4501-ba0d-d9b432974cb3",
+    "name": "yate de lujo",
+    "type": "yacht",
+    "description": "yate description",
+    "images": [
+      "https://nsaroiebmxfqjampulbh.supabase.co/storage/v1/object/public/assets/yachts/5mhhjtd6v8y_1772412209523.jpg"
+    ]
+  }
+]
